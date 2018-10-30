@@ -2,53 +2,57 @@
   (:refer-clojure :exclude [boolean]))
 
 (defn boolean [x]
-  (boolean "foo")
-  (boolean nil)
-  (boolean (+2 3)
-  (boolean true)
-  (boolean false))
+  (if x
+    true
+    false))
 
 (defn abs [x]
-  (if (< x 0)
-    (- (- x x) x)
-    x)
+  (if(< x 0)
+    (- x x x)
+    x))
 
 (defn divides? [divisor n]
-  (if(= (mod divisor n) 1)
-    (false)
-    (true)))
+  (if(= 0 (mod n divisor))
+    true
+    false)
+)
 
 (defn fizzbuzz [n]
   (cond
-    (mod n 3) "fizz"
-    (mod n 5) "buzz"
-    (mod n 15) "gotcha!"
-    :else      "zero")
+    (= 0 (mod n 15))"gotcha!"
+    (= 0 (mod n 5))"buzz"
+    (= 0 (mod n 3))"fizz"
+    :else ""
   )
+)
 
 (defn teen? [age]
-  (< (> age 12) 19)
+ (< 12 age 20)
 )
 
 (defn not-teen? [age]
-  (if(and(< age 13)(> age 19))
-    true)
-)
+  (cond
+    (teen? age)false
+    :else true
+  ))
 
 (defn generic-doublificate [x]
   (cond
-   (number? x)(* 2 x)
-   (empty? x)nil
-   (list? x)(* 2 x)
-   :else "true"
-   )
+   (number? x) (* x 2)
+   (empty? x) nil
+   (list? x) (* (count x) 2)
+   (vector? x) (* (count x) 2)
+   :else true
+ )
 )
 
 (defn leap-year? [year]
   (cond
-    (and (divides? year 4)(divides year 100)) true
-    (and (divides? year 4)(not (divides? year 100)))true
-    (not(divides? year 4))false
+    (= 0 (mod year 400))true
+    (= 0 (mod year 100))false
+    (= 0 (mod year 4))true
+    :else false
+  )
 )
 
 ; '_______'
